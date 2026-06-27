@@ -1,0 +1,403 @@
+// Flipkart Sticker Business — Order & Inventory Management System
+// Full database schema for PostgreSQL via Prisma ORM
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Authentication ─────────────────────────────────────────────
+
+enum UserRole {
+  ADMIN
+  EMPLOYEE
+  VIEWER
+}
+
+model User {
+  id             String    @id @default(cuid())
+  name           String
+  email          String    @unique
+  hashedPassword String
+  role           UserRole  @default(EMPLOYEE)
+  avatar         String?
+  isActive       Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  sessions       Session[]
+  inventoryLogs  InventoryLog[]
+  notifications  Notification[]
+  orders         Order[]       @relation("CreatedByUser")
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@map("sessions")
+}
+
+// ─── Product Catalog ────────────────────────────────────────────
+
+enum Marketplace {
+  FLIPKART
+  AMAZON
+  MEESHO
+  WEBSITE
+  OTHER
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  slug      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  products Product[]
+
+  @@map("categories")
+}
+
+model Brand {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  slug      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  products Product[]
+
+  @@map("brands")
+}
+
+model Product {
+  id            String      @id @default(cuid())
+  sku           String      @unique
+  fsn           String?     @unique  // Flipkart Serial Number
+  title         String
+  description   String?
+  brandId       String?
+  categoryId    String?
+  theme         String?              // e.g., "Anime", "Marvel", "Cute Animals"
+  costPrice     Decimal     @db.Decimal(10, 2)
+  sellingPrice  Decimal     @db.Decimal(10, 2)
+  currentStock  Int         @default(0)
+  reservedStock Int         @default(0)
+  // availableStock is computed: currentStock - reservedStock
+  reorderPoint  Int         @default(10)
+  barcode       String?     @unique
+  shelfLocation String?
+  marketplace   Marketplace @default(FLIPKART)
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  brand         Brand?         @relation(fields: [brandId], references: [id])
+  category      Category?      @relation(fields: [categoryId], references: [id])
+  images        ProductImage[]
+  orderItems    OrderItem[]
+  purchaseItems PurchaseOrderItem[]
+  inventoryLogs InventoryLog[]
+  returnItems   ReturnItem[]
+
+  @@index([sku])
+  @@index([fsn])
+  @@index([categoryId])
+  @@index([brandId])
+  @@index([marketplace])
+  @@index([currentStock])
+  @@map("products")
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  url       String
+  publicId  String?  // Cloudinary public ID
+  isPrimary Boolean  @default(false)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("product_images")
+}
+
+// ─── Inventory ──────────────────────────────────────────────────
+
+enum InventoryLogType {
+  PURCHASE         // Stock added from purchase order
+  SALE             // Stock deducted from order
+  RETURN           // Stock returned
+  ADJUSTMENT       // Manual stock adjustment
+  RESERVATION      // Stock reserved for packing
+  RELEASE          // Reserved stock released (cancelled order)
+  DAMAGE           // Stock lost to damage
+}
+
+model InventoryLog {
+  id          String           @id @default(cuid())
+  productId   String
+  type        InventoryLogType
+  quantity    Int              // Positive for additions, negative for deductions
+  prevStock   Int              // Stock before change
+  newStock    Int              // Stock after change
+  reference   String?          // Order ID, PO ID, or reason
+  notes       String?
+  userId      String?
+  createdAt   DateTime         @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User?   @relation(fields: [userId], references: [id])
+
+  @@index([productId])
+  @@index([type])
+  @@index([createdAt])
+  @@map("inventory_logs")
+}
+
+// ─── Orders ─────────────────────────────────────────────────────
+
+enum OrderStatus {
+  PENDING
+  PACKING
+  PACKED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique
+  marketplace     Marketplace @default(FLIPKART)
+  marketplaceOrderId String?  // External order ID from Flipkart etc.
+  customerName    String
+  customerPhone   String?
+  customerEmail   String?
+  shippingAddress String
+  city            String?
+  state           String?
+  pincode         String?
+  status          OrderStatus @default(PENDING)
+  subtotal        Decimal     @db.Decimal(10, 2)
+  shippingFee     Decimal     @db.Decimal(10, 2) @default(0)
+  discount        Decimal     @db.Decimal(10, 2) @default(0)
+  totalAmount     Decimal     @db.Decimal(10, 2)
+  trackingNumber  String?
+  shippingCarrier String?
+  notes           String?
+  createdById     String?
+  packedAt        DateTime?
+  shippedAt       DateTime?
+  deliveredAt     DateTime?
+  cancelledAt     DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  createdBy  User?       @relation("CreatedByUser", fields: [createdById], references: [id])
+  items      OrderItem[]
+  returns    Return[]
+
+  @@index([orderNumber])
+  @@index([status])
+  @@index([marketplace])
+  @@index([createdAt])
+  @@index([customerName])
+  @@map("orders")
+}
+
+model OrderItem {
+  id           String  @id @default(cuid())
+  orderId      String
+  productId    String
+  quantity     Int
+  unitPrice    Decimal @db.Decimal(10, 2)
+  totalPrice   Decimal @db.Decimal(10, 2)
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
+
+// ─── Returns ────────────────────────────────────────────────────
+
+enum ReturnStatus {
+  REQUESTED
+  APPROVED
+  RECEIVED
+  RESTOCKED
+  REJECTED
+}
+
+enum ReturnReason {
+  DAMAGED
+  WRONG_ITEM
+  NOT_AS_DESCRIBED
+  CUSTOMER_CHANGED_MIND
+  DEFECTIVE
+  OTHER
+}
+
+model Return {
+  id          String       @id @default(cuid())
+  orderId     String
+  status      ReturnStatus @default(REQUESTED)
+  reason      ReturnReason
+  notes       String?
+  refundAmount Decimal?    @db.Decimal(10, 2)
+  receivedAt  DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  order Order        @relation(fields: [orderId], references: [id])
+  items ReturnItem[]
+
+  @@index([orderId])
+  @@index([status])
+  @@map("returns")
+}
+
+model ReturnItem {
+  id          String @id @default(cuid())
+  returnId    String
+  productId   String
+  quantity    Int
+  restocked   Boolean @default(false)
+
+  return  Return  @relation(fields: [returnId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@index([returnId])
+  @@index([productId])
+  @@map("return_items")
+}
+
+// ─── Suppliers & Purchase Orders ────────────────────────────────
+
+model Supplier {
+  id            String   @id @default(cuid())
+  name          String
+  contactPerson String?
+  email         String?
+  phone         String?
+  address       String?
+  city          String?
+  state         String?
+  gstNumber     String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  purchaseOrders PurchaseOrder[]
+
+  @@map("suppliers")
+}
+
+enum PurchaseOrderStatus {
+  DRAFT
+  ORDERED
+  PARTIAL
+  RECEIVED
+  CANCELLED
+}
+
+model PurchaseOrder {
+  id            String              @id @default(cuid())
+  poNumber      String              @unique
+  supplierId    String
+  status        PurchaseOrderStatus @default(DRAFT)
+  subtotal      Decimal             @db.Decimal(10, 2)
+  tax           Decimal             @db.Decimal(10, 2) @default(0)
+  totalAmount   Decimal             @db.Decimal(10, 2)
+  notes         String?
+  expectedDate  DateTime?
+  receivedAt    DateTime?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  supplier Supplier            @relation(fields: [supplierId], references: [id])
+  items    PurchaseOrderItem[]
+
+  @@index([poNumber])
+  @@index([supplierId])
+  @@index([status])
+  @@map("purchase_orders")
+}
+
+model PurchaseOrderItem {
+  id               String  @id @default(cuid())
+  purchaseOrderId  String
+  productId        String
+  quantity         Int
+  receivedQuantity Int     @default(0)
+  unitCost         Decimal @db.Decimal(10, 2)
+  totalCost        Decimal @db.Decimal(10, 2)
+
+  purchaseOrder PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  product       Product       @relation(fields: [productId], references: [id])
+
+  @@index([purchaseOrderId])
+  @@index([productId])
+  @@map("purchase_order_items")
+}
+
+// ─── Notifications ──────────────────────────────────────────────
+
+enum NotificationType {
+  LOW_STOCK
+  NEW_ORDER
+  ORDER_SHIPPED
+  RETURN_REQUEST
+  PURCHASE_RECEIVED
+  SYSTEM
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String?
+  type      NotificationType
+  title     String
+  message   String
+  link      String?          // Internal link to relevant page
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+  @@map("notifications")
+}
+
+// ─── Settings ───────────────────────────────────────────────────
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+  label String?
+
+  @@map("settings")
+}
