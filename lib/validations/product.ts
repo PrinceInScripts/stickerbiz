@@ -16,12 +16,12 @@ export const productSchema = z.object({
   theme: z.string().max(100).optional().nullable(),
   costPrice: z.number().min(0, 'Cost price must be positive'),
   sellingPrice: z.number().min(0, 'Selling price must be positive'),
-  currentStock: z.number().int().min(0, 'Stock cannot be negative').default(0),
-  reorderPoint: z.number().int().min(0).default(10),
+  currentStock: z.number().int().min(0, 'Stock cannot be negative'),
+  reorderPoint: z.number().int().min(0),
   barcode: z.string().max(100).optional().nullable(),
   shelfLocation: z.string().max(50).optional().nullable(),
-  marketplace: z.enum(['FLIPKART', 'AMAZON', 'MEESHO', 'WEBSITE', 'OTHER']).default('FLIPKART'),
-  isActive: z.boolean().default(true),
+  marketplace: z.enum(['FLIPKART', 'AMAZON', 'MEESHO', 'WEBSITE', 'OTHER']),
+  isActive: z.boolean(),
 });
 
 export type ProductFormValues = z.infer<typeof productSchema>;
