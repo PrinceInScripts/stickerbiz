@@ -8,7 +8,8 @@ import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { db } from '@/lib/db';
 // import type { UserRole } from '@/app/generated/prisma';
-import { UserRole } from '@/app/generated/prisma';
+// import { UserRole } from '@/app/generated/prisma';
+import type { UserRole } from "@prisma/client";
 
 const JWT_SECRET = new TextEncoder().encode(
   process.env.NEXTAUTH_SECRET || 'fallback-secret-change-me'
