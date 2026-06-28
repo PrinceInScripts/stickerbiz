@@ -51,7 +51,7 @@ export function Header({ user }: HeaderProps) {
     .slice(0, 2);
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background/80 px-6 backdrop-blur-md">
+    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background/80 px-6 backdrop-blur-md max-md:pl-14">
       {/* Breadcrumbs */}
       <nav className="flex items-center gap-1.5 text-sm">
         {breadcrumbs.map((crumb, idx) => (

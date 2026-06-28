@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -235,7 +235,7 @@ export type InventoryLogGroupByOutputType = {
   _max: InventoryLogMaxAggregateOutputType | null
 }
 
-export type GetInventoryLogGroupByPayload<T extends InventoryLogGroupByArgs> = Prisma.PrismaPromise<
+type GetInventoryLogGroupByPayload<T extends InventoryLogGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<InventoryLogGroupByOutputType, T['by']> &
       {
@@ -1507,11 +1507,6 @@ export type InventoryLogFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` InventoryLogs.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of InventoryLogs.
-   */
   distinct?: Prisma.InventoryLogScalarFieldEnum | Prisma.InventoryLogScalarFieldEnum[]
 }
 

@@ -15,7 +15,7 @@
  * model files in the `model` directory!
  */
 
-import * as runtime from "@prisma/client/runtime/client"
+import * as runtime from "@prisma/client/runtime/library"
 import type * as Prisma from "../models"
 import { type PrismaClient } from "./class"
 
@@ -65,6 +65,14 @@ export type Decimal = runtime.Decimal
 export type DecimalJsLike = runtime.DecimalJsLike
 
 /**
+ * Metrics
+ */
+export type Metrics = runtime.Metrics
+export type Metric<T> = runtime.Metric<T>
+export type MetricHistogram = runtime.MetricHistogram
+export type MetricHistogramBucket = runtime.MetricHistogramBucket
+
+/**
 * Extensions
 */
 export type Extension = runtime.Types.Extensions.UserArgs
@@ -80,12 +88,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.8.0
- * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
+ * Prisma Client JS version: 6.19.3
+ * Query Engine version: c2990dca591cba766e3b7ef5d9e8a84796e47ab7
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.8.0",
-  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
+  client: "6.19.3",
+  engine: "c2990dca591cba766e3b7ef5d9e8a84796e47ab7"
 }
 
 /**
@@ -102,30 +110,28 @@ export type InputJsonValue = runtime.InputJsonValue
 
 
 export const NullTypes = {
-  DbNull: runtime.NullTypes.DbNull as (new (secret: never) => typeof runtime.DbNull),
-  JsonNull: runtime.NullTypes.JsonNull as (new (secret: never) => typeof runtime.JsonNull),
-  AnyNull: runtime.NullTypes.AnyNull as (new (secret: never) => typeof runtime.AnyNull),
+  DbNull: runtime.objectEnumValues.classes.DbNull as (new (secret: never) => typeof runtime.objectEnumValues.instances.DbNull),
+  JsonNull: runtime.objectEnumValues.classes.JsonNull as (new (secret: never) => typeof runtime.objectEnumValues.instances.JsonNull),
+  AnyNull: runtime.objectEnumValues.classes.AnyNull as (new (secret: never) => typeof runtime.objectEnumValues.instances.AnyNull),
 }
 /**
  * Helper for filtering JSON entries that have `null` on the database (empty on the db)
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-export const DbNull = runtime.DbNull
-
+export const DbNull = runtime.objectEnumValues.instances.DbNull
 /**
  * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-export const JsonNull = runtime.JsonNull
-
+export const JsonNull = runtime.objectEnumValues.instances.JsonNull
 /**
  * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-export const AnyNull = runtime.AnyNull
+export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 
 type SelectAndInclude = {
@@ -399,6 +405,7 @@ export const ModelName = {
   PurchaseOrder: 'PurchaseOrder',
   PurchaseOrderItem: 'PurchaseOrderItem',
   Notification: 'Notification',
+  ImportHistory: 'ImportHistory',
   Setting: 'Setting'
 } as const
 
@@ -415,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "category" | "brand" | "product" | "productImage" | "inventoryLog" | "order" | "orderItem" | "return" | "returnItem" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "notification" | "setting"
+    modelProps: "user" | "session" | "category" | "brand" | "product" | "productImage" | "inventoryLog" | "order" | "orderItem" | "return" | "returnItem" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "notification" | "importHistory" | "setting"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1529,6 +1536,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ImportHistory: {
+      payload: Prisma.$ImportHistoryPayload<ExtArgs>
+      fields: Prisma.ImportHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ImportHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ImportHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.ImportHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ImportHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.ImportHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.ImportHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.ImportHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ImportHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.ImportHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload>
+        }
+        update: {
+          args: Prisma.ImportHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.ImportHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ImportHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ImportHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.ImportHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.ImportHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateImportHistory>
+        }
+        groupBy: {
+          args: Prisma.ImportHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ImportHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ImportHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ImportHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
     Setting: {
       payload: Prisma.$SettingPayload<ExtArgs>
       fields: Prisma.SettingFieldRefs
@@ -1701,11 +1782,17 @@ export const ProductScalarFieldEnum = {
   theme: 'theme',
   costPrice: 'costPrice',
   sellingPrice: 'sellingPrice',
+  mrp: 'mrp',
   currentStock: 'currentStock',
   reservedStock: 'reservedStock',
+  systemStock: 'systemStock',
   reorderPoint: 'reorderPoint',
   barcode: 'barcode',
   shelfLocation: 'shelfLocation',
+  listingId: 'listingId',
+  listingStatus: 'listingStatus',
+  hsnCode: 'hsnCode',
+  fulfillmentBy: 'fulfillmentBy',
   marketplace: 'marketplace',
   isActive: 'isActive',
   createdAt: 'createdAt',
@@ -1875,6 +1962,26 @@ export const NotificationScalarFieldEnum = {
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const ImportHistoryScalarFieldEnum = {
+  id: 'id',
+  fileName: 'fileName',
+  uploadedById: 'uploadedById',
+  marketplace: 'marketplace',
+  totalRows: 'totalRows',
+  createdRows: 'createdRows',
+  updatedRows: 'updatedRows',
+  skippedRows: 'skippedRows',
+  failedRows: 'failedRows',
+  status: 'status',
+  errorLog: 'errorLog',
+  executionTime: 'executionTime',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt'
+} as const
+
+export type ImportHistoryScalarFieldEnum = (typeof ImportHistoryScalarFieldEnum)[keyof typeof ImportHistoryScalarFieldEnum]
 
 
 export const SettingScalarFieldEnum = {
@@ -2093,6 +2200,20 @@ export type ListEnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputT
 
 
 /**
+ * Reference to a field of type 'ImportStatus'
+ */
+export type EnumImportStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImportStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ImportStatus[]'
+ */
+export type ListEnumImportStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImportStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2112,22 +2233,26 @@ export type BatchPayload = {
   count: number
 }
 
+
+export type Datasource = {
+  url?: string
+}
+export type Datasources = {
+  db?: Datasource
+}
+
 export const defineExtension = runtime.Extensions.defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<"define", TypeMapCb, runtime.Types.Extensions.DefaultArgs>
 export type DefaultPrismaClient = PrismaClient
 export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
-export type PrismaClientOptions = ({
+export interface PrismaClientOptions {
   /**
-   * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-pg`.
+   * Overwrites the datasource url from your schema.prisma file
    */
-  adapter: runtime.SqlDriverAdapterFactory
-  accelerateUrl?: never
-} | {
+  datasources?: Datasources
   /**
-   * Prisma Accelerate URL allowing the client to connect through Accelerate instead of a direct database.
+   * Overwrites the datasource url from your schema.prisma file
    */
-  accelerateUrl: string
-  adapter?: never
-}) & {
+  datasourceUrl?: string
   /**
    * @default "colorless"
    */
@@ -2154,7 +2279,7 @@ export type PrismaClientOptions = ({
    *  { emit: 'stdout', level: 'error' }
    * 
    * ```
-   * Read more in our [docs](https://pris.ly/d/logging).
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
    */
   log?: (LogLevel | LogDefinition)[]
   /**
@@ -2167,6 +2292,10 @@ export type PrismaClientOptions = ({
     timeout?: number
     isolationLevel?: TransactionIsolationLevel
   }
+  /**
+   * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
+   */
+  adapter?: runtime.SqlDriverAdapterFactory | null
   /**
    * Global configuration for omitting model fields by default.
    * 
@@ -2182,37 +2311,6 @@ export type PrismaClientOptions = ({
    * ```
    */
   omit?: GlobalOmitConfig
-  /**
-   * SQL commenter plugins that add metadata to SQL queries as comments.
-   * Comments follow the sqlcommenter format: https://google.github.io/sqlcommenter/
-   * 
-   * @example
-   * ```
-   * const prisma = new PrismaClient({
-   *   adapter,
-   *   comments: [
-   *     traceContext(),
-   *     queryInsights(),
-   *   ],
-   * })
-   * ```
-   */
-  comments?: runtime.SqlCommenterPlugin[]
-  /**
-   * Optional maximum size for the query plan cache. If not provided, a default size will be used.
-   * A value of `0` can be used to disable the cache entirely. A higher cache size can improve
-   * performance for applications that execute a large number of unique queries, while a smaller
-   * cache size can reduce memory usage.
-   * 
-   * @example
-   * ```
-   * const prisma = new PrismaClient({
-   *   adapter,
-   *   queryPlanCacheMaxSize: 100,
-   * })
-   * ```
-   */
-  queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
@@ -2230,6 +2328,7 @@ export type GlobalOmitConfig = {
   purchaseOrder?: Prisma.PurchaseOrderOmit
   purchaseOrderItem?: Prisma.PurchaseOrderItemOmit
   notification?: Prisma.NotificationOmit
+  importHistory?: Prisma.ImportHistoryOmit
   setting?: Prisma.SettingOmit
 }
 

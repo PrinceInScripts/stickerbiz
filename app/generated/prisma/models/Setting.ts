@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -151,7 +151,7 @@ export type SettingGroupByOutputType = {
   _max: SettingMaxAggregateOutputType | null
 }
 
-export type GetSettingGroupByPayload<T extends SettingGroupByArgs> = Prisma.PrismaPromise<
+type GetSettingGroupByPayload<T extends SettingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<SettingGroupByOutputType, T['by']> &
       {
@@ -926,11 +926,6 @@ export type SettingFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` Settings.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of Settings.
-   */
   distinct?: Prisma.SettingScalarFieldEnum | Prisma.SettingScalarFieldEnum[]
 }
 

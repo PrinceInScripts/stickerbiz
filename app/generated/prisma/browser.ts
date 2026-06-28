@@ -93,6 +93,11 @@ export type PurchaseOrderItem = Prisma.PurchaseOrderItemModel
  */
 export type Notification = Prisma.NotificationModel
 /**
+ * Model ImportHistory
+ * 
+ */
+export type ImportHistory = Prisma.ImportHistoryModel
+/**
  * Model Setting
  * 
  */

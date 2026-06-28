@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -186,7 +186,7 @@ export type UserGroupByOutputType = {
   _max: UserMaxAggregateOutputType | null
 }
 
-export type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<UserGroupByOutputType, T['by']> &
       {
@@ -218,6 +218,7 @@ export type UserWhereInput = {
   inventoryLogs?: Prisma.InventoryLogListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   orders?: Prisma.OrderListRelationFilter
+  importHistory?: Prisma.ImportHistoryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -234,6 +235,7 @@ export type UserOrderByWithRelationInput = {
   inventoryLogs?: Prisma.InventoryLogOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
+  importHistory?: Prisma.ImportHistoryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -253,6 +255,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   inventoryLogs?: Prisma.InventoryLogListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   orders?: Prisma.OrderListRelationFilter
+  importHistory?: Prisma.ImportHistoryListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -299,6 +302,7 @@ export type UserCreateInput = {
   inventoryLogs?: Prisma.InventoryLogCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput
+  importHistory?: Prisma.ImportHistoryCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -315,6 +319,7 @@ export type UserUncheckedCreateInput = {
   inventoryLogs?: Prisma.InventoryLogUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput
+  importHistory?: Prisma.ImportHistoryUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUpdateInput = {
@@ -331,6 +336,7 @@ export type UserUpdateInput = {
   inventoryLogs?: Prisma.InventoryLogUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput
+  importHistory?: Prisma.ImportHistoryUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -347,6 +353,7 @@ export type UserUncheckedUpdateInput = {
   inventoryLogs?: Prisma.InventoryLogUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  importHistory?: Prisma.ImportHistoryUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -513,6 +520,20 @@ export type UserUpdateOneWithoutNotificationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
 }
 
+export type UserCreateNestedOneWithoutImportHistoryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutImportHistoryInput, Prisma.UserUncheckedCreateWithoutImportHistoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutImportHistoryInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutImportHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutImportHistoryInput, Prisma.UserUncheckedCreateWithoutImportHistoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutImportHistoryInput
+  upsert?: Prisma.UserUpsertWithoutImportHistoryInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutImportHistoryInput, Prisma.UserUpdateWithoutImportHistoryInput>, Prisma.UserUncheckedUpdateWithoutImportHistoryInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -526,6 +547,7 @@ export type UserCreateWithoutSessionsInput = {
   inventoryLogs?: Prisma.InventoryLogCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput
+  importHistory?: Prisma.ImportHistoryCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -541,6 +563,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   inventoryLogs?: Prisma.InventoryLogUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput
+  importHistory?: Prisma.ImportHistoryUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -572,6 +595,7 @@ export type UserUpdateWithoutSessionsInput = {
   inventoryLogs?: Prisma.InventoryLogUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput
+  importHistory?: Prisma.ImportHistoryUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -587,6 +611,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   inventoryLogs?: Prisma.InventoryLogUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  importHistory?: Prisma.ImportHistoryUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateWithoutInventoryLogsInput = {
@@ -602,6 +627,7 @@ export type UserCreateWithoutInventoryLogsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput
+  importHistory?: Prisma.ImportHistoryCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutInventoryLogsInput = {
@@ -617,6 +643,7 @@ export type UserUncheckedCreateWithoutInventoryLogsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput
+  importHistory?: Prisma.ImportHistoryUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutInventoryLogsInput = {
@@ -648,6 +675,7 @@ export type UserUpdateWithoutInventoryLogsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput
+  importHistory?: Prisma.ImportHistoryUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInventoryLogsInput = {
@@ -663,6 +691,7 @@ export type UserUncheckedUpdateWithoutInventoryLogsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  importHistory?: Prisma.ImportHistoryUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateWithoutOrdersInput = {
@@ -678,6 +707,7 @@ export type UserCreateWithoutOrdersInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   inventoryLogs?: Prisma.InventoryLogCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  importHistory?: Prisma.ImportHistoryCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -693,6 +723,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   inventoryLogs?: Prisma.InventoryLogUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  importHistory?: Prisma.ImportHistoryUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -724,6 +755,7 @@ export type UserUpdateWithoutOrdersInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   inventoryLogs?: Prisma.InventoryLogUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  importHistory?: Prisma.ImportHistoryUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -739,6 +771,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   inventoryLogs?: Prisma.InventoryLogUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  importHistory?: Prisma.ImportHistoryUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -754,6 +787,7 @@ export type UserCreateWithoutNotificationsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   inventoryLogs?: Prisma.InventoryLogCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput
+  importHistory?: Prisma.ImportHistoryCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -769,6 +803,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   inventoryLogs?: Prisma.InventoryLogUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput
+  importHistory?: Prisma.ImportHistoryUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -800,6 +835,7 @@ export type UserUpdateWithoutNotificationsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   inventoryLogs?: Prisma.InventoryLogUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput
+  importHistory?: Prisma.ImportHistoryUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -815,6 +851,87 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   inventoryLogs?: Prisma.InventoryLogUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  importHistory?: Prisma.ImportHistoryUncheckedUpdateManyWithoutUploadedByNestedInput
+}
+
+export type UserCreateWithoutImportHistoryInput = {
+  id?: string
+  name: string
+  email: string
+  hashedPassword: string
+  role?: $Enums.UserRole
+  avatar?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  inventoryLogs?: Prisma.InventoryLogCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutImportHistoryInput = {
+  id?: string
+  name: string
+  email: string
+  hashedPassword: string
+  role?: $Enums.UserRole
+  avatar?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  inventoryLogs?: Prisma.InventoryLogUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutImportHistoryInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutImportHistoryInput, Prisma.UserUncheckedCreateWithoutImportHistoryInput>
+}
+
+export type UserUpsertWithoutImportHistoryInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutImportHistoryInput, Prisma.UserUncheckedUpdateWithoutImportHistoryInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutImportHistoryInput, Prisma.UserUncheckedCreateWithoutImportHistoryInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutImportHistoryInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutImportHistoryInput, Prisma.UserUncheckedUpdateWithoutImportHistoryInput>
+}
+
+export type UserUpdateWithoutImportHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  inventoryLogs?: Prisma.InventoryLogUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutImportHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  inventoryLogs?: Prisma.InventoryLogUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 
@@ -827,6 +944,7 @@ export type UserCountOutputType = {
   inventoryLogs: number
   notifications: number
   orders: number
+  importHistory: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -834,6 +952,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   inventoryLogs?: boolean | UserCountOutputTypeCountInventoryLogsArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   orders?: boolean | UserCountOutputTypeCountOrdersArgs
+  importHistory?: boolean | UserCountOutputTypeCountImportHistoryArgs
 }
 
 /**
@@ -874,6 +993,13 @@ export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.OrderWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountImportHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ImportHistoryWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -889,6 +1015,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   inventoryLogs?: boolean | Prisma.User$inventoryLogsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
+  importHistory?: boolean | Prisma.User$importHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -934,6 +1061,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   inventoryLogs?: boolean | Prisma.User$inventoryLogsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
+  importHistory?: boolean | Prisma.User$importHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -946,6 +1074,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     inventoryLogs: Prisma.$InventoryLogPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
+    importHistory: Prisma.$ImportHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1355,6 +1484,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   inventoryLogs<T extends Prisma.User$inventoryLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$inventoryLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  importHistory<T extends Prisma.User$importHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$importHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ImportHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1589,11 +1719,6 @@ export type UserFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Skip the first `n` Users.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of Users.
-   */
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
@@ -1879,6 +2004,30 @@ export type User$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
+}
+
+/**
+ * User.importHistory
+ */
+export type User$importHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ImportHistory
+   */
+  select?: Prisma.ImportHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ImportHistory
+   */
+  omit?: Prisma.ImportHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ImportHistoryInclude<ExtArgs> | null
+  where?: Prisma.ImportHistoryWhereInput
+  orderBy?: Prisma.ImportHistoryOrderByWithRelationInput | Prisma.ImportHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.ImportHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ImportHistoryScalarFieldEnum | Prisma.ImportHistoryScalarFieldEnum[]
 }
 
 /**

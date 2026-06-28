@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -220,7 +220,7 @@ export type ReturnGroupByOutputType = {
   _max: ReturnMaxAggregateOutputType | null
 }
 
-export type GetReturnGroupByPayload<T extends ReturnGroupByArgs> = Prisma.PrismaPromise<
+type GetReturnGroupByPayload<T extends ReturnGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ReturnGroupByOutputType, T['by']> &
       {
@@ -509,14 +509,6 @@ export type EnumReturnStatusFieldUpdateOperationsInput = {
 
 export type EnumReturnReasonFieldUpdateOperationsInput = {
   set?: $Enums.ReturnReason
-}
-
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type ReturnCreateNestedOneWithoutItemsInput = {
@@ -1451,11 +1443,6 @@ export type ReturnFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Skip the first `n` Returns.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of Returns.
-   */
   distinct?: Prisma.ReturnScalarFieldEnum | Prisma.ReturnScalarFieldEnum[]
 }
 

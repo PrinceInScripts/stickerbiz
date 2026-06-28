@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -29,16 +29,20 @@ export type AggregateProduct = {
 export type ProductAvgAggregateOutputType = {
   costPrice: runtime.Decimal | null
   sellingPrice: runtime.Decimal | null
+  mrp: runtime.Decimal | null
   currentStock: number | null
   reservedStock: number | null
+  systemStock: number | null
   reorderPoint: number | null
 }
 
 export type ProductSumAggregateOutputType = {
   costPrice: runtime.Decimal | null
   sellingPrice: runtime.Decimal | null
+  mrp: runtime.Decimal | null
   currentStock: number | null
   reservedStock: number | null
+  systemStock: number | null
   reorderPoint: number | null
 }
 
@@ -53,11 +57,17 @@ export type ProductMinAggregateOutputType = {
   theme: string | null
   costPrice: runtime.Decimal | null
   sellingPrice: runtime.Decimal | null
+  mrp: runtime.Decimal | null
   currentStock: number | null
   reservedStock: number | null
+  systemStock: number | null
   reorderPoint: number | null
   barcode: string | null
   shelfLocation: string | null
+  listingId: string | null
+  listingStatus: string | null
+  hsnCode: string | null
+  fulfillmentBy: string | null
   marketplace: $Enums.Marketplace | null
   isActive: boolean | null
   createdAt: Date | null
@@ -75,11 +85,17 @@ export type ProductMaxAggregateOutputType = {
   theme: string | null
   costPrice: runtime.Decimal | null
   sellingPrice: runtime.Decimal | null
+  mrp: runtime.Decimal | null
   currentStock: number | null
   reservedStock: number | null
+  systemStock: number | null
   reorderPoint: number | null
   barcode: string | null
   shelfLocation: string | null
+  listingId: string | null
+  listingStatus: string | null
+  hsnCode: string | null
+  fulfillmentBy: string | null
   marketplace: $Enums.Marketplace | null
   isActive: boolean | null
   createdAt: Date | null
@@ -97,11 +113,17 @@ export type ProductCountAggregateOutputType = {
   theme: number
   costPrice: number
   sellingPrice: number
+  mrp: number
   currentStock: number
   reservedStock: number
+  systemStock: number
   reorderPoint: number
   barcode: number
   shelfLocation: number
+  listingId: number
+  listingStatus: number
+  hsnCode: number
+  fulfillmentBy: number
   marketplace: number
   isActive: number
   createdAt: number
@@ -113,16 +135,20 @@ export type ProductCountAggregateOutputType = {
 export type ProductAvgAggregateInputType = {
   costPrice?: true
   sellingPrice?: true
+  mrp?: true
   currentStock?: true
   reservedStock?: true
+  systemStock?: true
   reorderPoint?: true
 }
 
 export type ProductSumAggregateInputType = {
   costPrice?: true
   sellingPrice?: true
+  mrp?: true
   currentStock?: true
   reservedStock?: true
+  systemStock?: true
   reorderPoint?: true
 }
 
@@ -137,11 +163,17 @@ export type ProductMinAggregateInputType = {
   theme?: true
   costPrice?: true
   sellingPrice?: true
+  mrp?: true
   currentStock?: true
   reservedStock?: true
+  systemStock?: true
   reorderPoint?: true
   barcode?: true
   shelfLocation?: true
+  listingId?: true
+  listingStatus?: true
+  hsnCode?: true
+  fulfillmentBy?: true
   marketplace?: true
   isActive?: true
   createdAt?: true
@@ -159,11 +191,17 @@ export type ProductMaxAggregateInputType = {
   theme?: true
   costPrice?: true
   sellingPrice?: true
+  mrp?: true
   currentStock?: true
   reservedStock?: true
+  systemStock?: true
   reorderPoint?: true
   barcode?: true
   shelfLocation?: true
+  listingId?: true
+  listingStatus?: true
+  hsnCode?: true
+  fulfillmentBy?: true
   marketplace?: true
   isActive?: true
   createdAt?: true
@@ -181,11 +219,17 @@ export type ProductCountAggregateInputType = {
   theme?: true
   costPrice?: true
   sellingPrice?: true
+  mrp?: true
   currentStock?: true
   reservedStock?: true
+  systemStock?: true
   reorderPoint?: true
   barcode?: true
   shelfLocation?: true
+  listingId?: true
+  listingStatus?: true
+  hsnCode?: true
+  fulfillmentBy?: true
   marketplace?: true
   isActive?: true
   createdAt?: true
@@ -290,11 +334,17 @@ export type ProductGroupByOutputType = {
   theme: string | null
   costPrice: runtime.Decimal
   sellingPrice: runtime.Decimal
+  mrp: runtime.Decimal | null
   currentStock: number
   reservedStock: number
+  systemStock: number | null
   reorderPoint: number
   barcode: string | null
   shelfLocation: string | null
+  listingId: string | null
+  listingStatus: string | null
+  hsnCode: string | null
+  fulfillmentBy: string | null
   marketplace: $Enums.Marketplace
   isActive: boolean
   createdAt: Date
@@ -306,7 +356,7 @@ export type ProductGroupByOutputType = {
   _max: ProductMaxAggregateOutputType | null
 }
 
-export type GetProductGroupByPayload<T extends ProductGroupByArgs> = Prisma.PrismaPromise<
+type GetProductGroupByPayload<T extends ProductGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ProductGroupByOutputType, T['by']> &
       {
@@ -335,11 +385,17 @@ export type ProductWhereInput = {
   theme?: Prisma.StringNullableFilter<"Product"> | string | null
   costPrice?: Prisma.DecimalFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.DecimalNullableFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFilter<"Product"> | number
   reservedStock?: Prisma.IntFilter<"Product"> | number
+  systemStock?: Prisma.IntNullableFilter<"Product"> | number | null
   reorderPoint?: Prisma.IntFilter<"Product"> | number
   barcode?: Prisma.StringNullableFilter<"Product"> | string | null
   shelfLocation?: Prisma.StringNullableFilter<"Product"> | string | null
+  listingId?: Prisma.StringNullableFilter<"Product"> | string | null
+  listingStatus?: Prisma.StringNullableFilter<"Product"> | string | null
+  hsnCode?: Prisma.StringNullableFilter<"Product"> | string | null
+  fulfillmentBy?: Prisma.StringNullableFilter<"Product"> | string | null
   marketplace?: Prisma.EnumMarketplaceFilter<"Product"> | $Enums.Marketplace
   isActive?: Prisma.BoolFilter<"Product"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -364,11 +420,17 @@ export type ProductOrderByWithRelationInput = {
   theme?: Prisma.SortOrderInput | Prisma.SortOrder
   costPrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   reservedStock?: Prisma.SortOrder
+  systemStock?: Prisma.SortOrderInput | Prisma.SortOrder
   reorderPoint?: Prisma.SortOrder
   barcode?: Prisma.SortOrderInput | Prisma.SortOrder
   shelfLocation?: Prisma.SortOrderInput | Prisma.SortOrder
+  listingId?: Prisma.SortOrderInput | Prisma.SortOrder
+  listingStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  hsnCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  fulfillmentBy?: Prisma.SortOrderInput | Prisma.SortOrder
   marketplace?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -385,11 +447,11 @@ export type ProductOrderByWithRelationInput = {
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   sku?: string
-  fsn?: string
   barcode?: string
   AND?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
+  fsn?: Prisma.StringNullableFilter<"Product"> | string | null
   title?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringNullableFilter<"Product"> | string | null
   brandId?: Prisma.StringNullableFilter<"Product"> | string | null
@@ -397,10 +459,16 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   theme?: Prisma.StringNullableFilter<"Product"> | string | null
   costPrice?: Prisma.DecimalFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.DecimalNullableFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFilter<"Product"> | number
   reservedStock?: Prisma.IntFilter<"Product"> | number
+  systemStock?: Prisma.IntNullableFilter<"Product"> | number | null
   reorderPoint?: Prisma.IntFilter<"Product"> | number
   shelfLocation?: Prisma.StringNullableFilter<"Product"> | string | null
+  listingId?: Prisma.StringNullableFilter<"Product"> | string | null
+  listingStatus?: Prisma.StringNullableFilter<"Product"> | string | null
+  hsnCode?: Prisma.StringNullableFilter<"Product"> | string | null
+  fulfillmentBy?: Prisma.StringNullableFilter<"Product"> | string | null
   marketplace?: Prisma.EnumMarketplaceFilter<"Product"> | $Enums.Marketplace
   isActive?: Prisma.BoolFilter<"Product"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -412,7 +480,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   purchaseItems?: Prisma.PurchaseOrderItemListRelationFilter
   inventoryLogs?: Prisma.InventoryLogListRelationFilter
   returnItems?: Prisma.ReturnItemListRelationFilter
-}, "id" | "sku" | "fsn" | "barcode">
+}, "id" | "sku" | "barcode">
 
 export type ProductOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -425,11 +493,17 @@ export type ProductOrderByWithAggregationInput = {
   theme?: Prisma.SortOrderInput | Prisma.SortOrder
   costPrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   reservedStock?: Prisma.SortOrder
+  systemStock?: Prisma.SortOrderInput | Prisma.SortOrder
   reorderPoint?: Prisma.SortOrder
   barcode?: Prisma.SortOrderInput | Prisma.SortOrder
   shelfLocation?: Prisma.SortOrderInput | Prisma.SortOrder
+  listingId?: Prisma.SortOrderInput | Prisma.SortOrder
+  listingStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  hsnCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  fulfillmentBy?: Prisma.SortOrderInput | Prisma.SortOrder
   marketplace?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -455,11 +529,17 @@ export type ProductScalarWhereWithAggregatesInput = {
   theme?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   costPrice?: Prisma.DecimalWithAggregatesFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalWithAggregatesFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.DecimalNullableWithAggregatesFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntWithAggregatesFilter<"Product"> | number
   reservedStock?: Prisma.IntWithAggregatesFilter<"Product"> | number
+  systemStock?: Prisma.IntNullableWithAggregatesFilter<"Product"> | number | null
   reorderPoint?: Prisma.IntWithAggregatesFilter<"Product"> | number
   barcode?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   shelfLocation?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  listingId?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  listingStatus?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  hsnCode?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  fulfillmentBy?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   marketplace?: Prisma.EnumMarketplaceWithAggregatesFilter<"Product"> | $Enums.Marketplace
   isActive?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
@@ -475,11 +555,17 @@ export type ProductCreateInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -504,11 +590,17 @@ export type ProductUncheckedCreateInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -529,11 +621,17 @@ export type ProductUpdateInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -558,11 +656,17 @@ export type ProductUncheckedUpdateInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -585,11 +689,17 @@ export type ProductCreateManyInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -605,11 +715,17 @@ export type ProductUpdateManyMutationInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -627,11 +743,17 @@ export type ProductUncheckedUpdateManyInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -659,11 +781,17 @@ export type ProductCountOrderByAggregateInput = {
   theme?: Prisma.SortOrder
   costPrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   reservedStock?: Prisma.SortOrder
+  systemStock?: Prisma.SortOrder
   reorderPoint?: Prisma.SortOrder
   barcode?: Prisma.SortOrder
   shelfLocation?: Prisma.SortOrder
+  listingId?: Prisma.SortOrder
+  listingStatus?: Prisma.SortOrder
+  hsnCode?: Prisma.SortOrder
+  fulfillmentBy?: Prisma.SortOrder
   marketplace?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -673,8 +801,10 @@ export type ProductCountOrderByAggregateInput = {
 export type ProductAvgOrderByAggregateInput = {
   costPrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   reservedStock?: Prisma.SortOrder
+  systemStock?: Prisma.SortOrder
   reorderPoint?: Prisma.SortOrder
 }
 
@@ -689,11 +819,17 @@ export type ProductMaxOrderByAggregateInput = {
   theme?: Prisma.SortOrder
   costPrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   reservedStock?: Prisma.SortOrder
+  systemStock?: Prisma.SortOrder
   reorderPoint?: Prisma.SortOrder
   barcode?: Prisma.SortOrder
   shelfLocation?: Prisma.SortOrder
+  listingId?: Prisma.SortOrder
+  listingStatus?: Prisma.SortOrder
+  hsnCode?: Prisma.SortOrder
+  fulfillmentBy?: Prisma.SortOrder
   marketplace?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -711,11 +847,17 @@ export type ProductMinOrderByAggregateInput = {
   theme?: Prisma.SortOrder
   costPrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   reservedStock?: Prisma.SortOrder
+  systemStock?: Prisma.SortOrder
   reorderPoint?: Prisma.SortOrder
   barcode?: Prisma.SortOrder
   shelfLocation?: Prisma.SortOrder
+  listingId?: Prisma.SortOrder
+  listingStatus?: Prisma.SortOrder
+  hsnCode?: Prisma.SortOrder
+  fulfillmentBy?: Prisma.SortOrder
   marketplace?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -725,8 +867,10 @@ export type ProductMinOrderByAggregateInput = {
 export type ProductSumOrderByAggregateInput = {
   costPrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   reservedStock?: Prisma.SortOrder
+  systemStock?: Prisma.SortOrder
   reorderPoint?: Prisma.SortOrder
 }
 
@@ -827,8 +971,24 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -918,11 +1078,17 @@ export type ProductCreateWithoutCategoryInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -945,11 +1111,17 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1001,11 +1173,17 @@ export type ProductScalarWhereInput = {
   theme?: Prisma.StringNullableFilter<"Product"> | string | null
   costPrice?: Prisma.DecimalFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.DecimalNullableFilter<"Product"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFilter<"Product"> | number
   reservedStock?: Prisma.IntFilter<"Product"> | number
+  systemStock?: Prisma.IntNullableFilter<"Product"> | number | null
   reorderPoint?: Prisma.IntFilter<"Product"> | number
   barcode?: Prisma.StringNullableFilter<"Product"> | string | null
   shelfLocation?: Prisma.StringNullableFilter<"Product"> | string | null
+  listingId?: Prisma.StringNullableFilter<"Product"> | string | null
+  listingStatus?: Prisma.StringNullableFilter<"Product"> | string | null
+  hsnCode?: Prisma.StringNullableFilter<"Product"> | string | null
+  fulfillmentBy?: Prisma.StringNullableFilter<"Product"> | string | null
   marketplace?: Prisma.EnumMarketplaceFilter<"Product"> | $Enums.Marketplace
   isActive?: Prisma.BoolFilter<"Product"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -1021,11 +1199,17 @@ export type ProductCreateWithoutBrandInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1048,11 +1232,17 @@ export type ProductUncheckedCreateWithoutBrandInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1099,11 +1289,17 @@ export type ProductCreateWithoutImagesInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1127,11 +1323,17 @@ export type ProductUncheckedCreateWithoutImagesInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1167,11 +1369,17 @@ export type ProductUpdateWithoutImagesInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1195,11 +1403,17 @@ export type ProductUncheckedUpdateWithoutImagesInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1219,11 +1433,17 @@ export type ProductCreateWithoutInventoryLogsInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1247,11 +1467,17 @@ export type ProductUncheckedCreateWithoutInventoryLogsInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1287,11 +1513,17 @@ export type ProductUpdateWithoutInventoryLogsInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1315,11 +1547,17 @@ export type ProductUncheckedUpdateWithoutInventoryLogsInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1339,11 +1577,17 @@ export type ProductCreateWithoutOrderItemsInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1367,11 +1611,17 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1407,11 +1657,17 @@ export type ProductUpdateWithoutOrderItemsInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1435,11 +1691,17 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1459,11 +1721,17 @@ export type ProductCreateWithoutReturnItemsInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1487,11 +1755,17 @@ export type ProductUncheckedCreateWithoutReturnItemsInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1527,11 +1801,17 @@ export type ProductUpdateWithoutReturnItemsInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1555,11 +1835,17 @@ export type ProductUncheckedUpdateWithoutReturnItemsInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1579,11 +1865,17 @@ export type ProductCreateWithoutPurchaseItemsInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1607,11 +1899,17 @@ export type ProductUncheckedCreateWithoutPurchaseItemsInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1647,11 +1945,17 @@ export type ProductUpdateWithoutPurchaseItemsInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1675,11 +1979,17 @@ export type ProductUncheckedUpdateWithoutPurchaseItemsInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1700,11 +2010,17 @@ export type ProductCreateManyCategoryInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1720,11 +2036,17 @@ export type ProductUpdateWithoutCategoryInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1747,11 +2069,17 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1773,11 +2101,17 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1794,11 +2128,17 @@ export type ProductCreateManyBrandInput = {
   theme?: string | null
   costPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: number
   reservedStock?: number
+  systemStock?: number | null
   reorderPoint?: number
   barcode?: string | null
   shelfLocation?: string | null
+  listingId?: string | null
+  listingStatus?: string | null
+  hsnCode?: string | null
+  fulfillmentBy?: string | null
   marketplace?: $Enums.Marketplace
   isActive?: boolean
   createdAt?: Date | string
@@ -1814,11 +2154,17 @@ export type ProductUpdateWithoutBrandInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1841,11 +2187,17 @@ export type ProductUncheckedUpdateWithoutBrandInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1867,11 +2219,17 @@ export type ProductUncheckedUpdateManyWithoutBrandInput = {
   theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   sellingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentStock?: Prisma.IntFieldUpdateOperationsInput | number
   reservedStock?: Prisma.IntFieldUpdateOperationsInput | number
+  systemStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shelfLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listingStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fulfillmentBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   marketplace?: Prisma.EnumMarketplaceFieldUpdateOperationsInput | $Enums.Marketplace
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1956,11 +2314,17 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   theme?: boolean
   costPrice?: boolean
   sellingPrice?: boolean
+  mrp?: boolean
   currentStock?: boolean
   reservedStock?: boolean
+  systemStock?: boolean
   reorderPoint?: boolean
   barcode?: boolean
   shelfLocation?: boolean
+  listingId?: boolean
+  listingStatus?: boolean
+  hsnCode?: boolean
+  fulfillmentBy?: boolean
   marketplace?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -1986,11 +2350,17 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   theme?: boolean
   costPrice?: boolean
   sellingPrice?: boolean
+  mrp?: boolean
   currentStock?: boolean
   reservedStock?: boolean
+  systemStock?: boolean
   reorderPoint?: boolean
   barcode?: boolean
   shelfLocation?: boolean
+  listingId?: boolean
+  listingStatus?: boolean
+  hsnCode?: boolean
+  fulfillmentBy?: boolean
   marketplace?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -2010,11 +2380,17 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   theme?: boolean
   costPrice?: boolean
   sellingPrice?: boolean
+  mrp?: boolean
   currentStock?: boolean
   reservedStock?: boolean
+  systemStock?: boolean
   reorderPoint?: boolean
   barcode?: boolean
   shelfLocation?: boolean
+  listingId?: boolean
+  listingStatus?: boolean
+  hsnCode?: boolean
+  fulfillmentBy?: boolean
   marketplace?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -2034,18 +2410,24 @@ export type ProductSelectScalar = {
   theme?: boolean
   costPrice?: boolean
   sellingPrice?: boolean
+  mrp?: boolean
   currentStock?: boolean
   reservedStock?: boolean
+  systemStock?: boolean
   reorderPoint?: boolean
   barcode?: boolean
   shelfLocation?: boolean
+  listingId?: boolean
+  listingStatus?: boolean
+  hsnCode?: boolean
+  fulfillmentBy?: boolean
   marketplace?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sku" | "fsn" | "title" | "description" | "brandId" | "categoryId" | "theme" | "costPrice" | "sellingPrice" | "currentStock" | "reservedStock" | "reorderPoint" | "barcode" | "shelfLocation" | "marketplace" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sku" | "fsn" | "title" | "description" | "brandId" | "categoryId" | "theme" | "costPrice" | "sellingPrice" | "mrp" | "currentStock" | "reservedStock" | "systemStock" | "reorderPoint" | "barcode" | "shelfLocation" | "listingId" | "listingStatus" | "hsnCode" | "fulfillmentBy" | "marketplace" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   brand?: boolean | Prisma.Product$brandArgs<ExtArgs>
   category?: boolean | Prisma.Product$categoryArgs<ExtArgs>
@@ -2087,11 +2469,17 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     theme: string | null
     costPrice: runtime.Decimal
     sellingPrice: runtime.Decimal
+    mrp: runtime.Decimal | null
     currentStock: number
     reservedStock: number
+    systemStock: number | null
     reorderPoint: number
     barcode: string | null
     shelfLocation: string | null
+    listingId: string | null
+    listingStatus: string | null
+    hsnCode: string | null
+    fulfillmentBy: string | null
     marketplace: $Enums.Marketplace
     isActive: boolean
     createdAt: Date
@@ -2536,11 +2924,17 @@ export interface ProductFieldRefs {
   readonly theme: Prisma.FieldRef<"Product", 'String'>
   readonly costPrice: Prisma.FieldRef<"Product", 'Decimal'>
   readonly sellingPrice: Prisma.FieldRef<"Product", 'Decimal'>
+  readonly mrp: Prisma.FieldRef<"Product", 'Decimal'>
   readonly currentStock: Prisma.FieldRef<"Product", 'Int'>
   readonly reservedStock: Prisma.FieldRef<"Product", 'Int'>
+  readonly systemStock: Prisma.FieldRef<"Product", 'Int'>
   readonly reorderPoint: Prisma.FieldRef<"Product", 'Int'>
   readonly barcode: Prisma.FieldRef<"Product", 'String'>
   readonly shelfLocation: Prisma.FieldRef<"Product", 'String'>
+  readonly listingId: Prisma.FieldRef<"Product", 'String'>
+  readonly listingStatus: Prisma.FieldRef<"Product", 'String'>
+  readonly hsnCode: Prisma.FieldRef<"Product", 'String'>
+  readonly fulfillmentBy: Prisma.FieldRef<"Product", 'String'>
   readonly marketplace: Prisma.FieldRef<"Product", 'Marketplace'>
   readonly isActive: Prisma.FieldRef<"Product", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Product", 'DateTime'>
@@ -2741,11 +3135,6 @@ export type ProductFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` Products.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of Products.
-   */
   distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[]
 }
 

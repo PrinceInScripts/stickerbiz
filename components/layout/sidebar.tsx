@@ -2,10 +2,11 @@
 
 /**
  * Sidebar Navigation — collapsible sidebar with grouped navigation items.
- * Apple-inspired minimal design with smooth transitions.
+ * On mobile: hidden by default, toggled via hamburger, auto-closes on navigation.
+ * On desktop: collapsible between full and icon-only modes.
  */
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -21,7 +22,7 @@ import {
 } from '@/components/ui/tooltip';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Menu, X } from 'lucide-react';
 import type { CurrentUser } from '@/lib/auth';
 
 interface SidebarProps {
@@ -30,7 +31,29 @@ interface SidebarProps {
 
 export function Sidebar({ user }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+
+  // Close mobile sidebar on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Prevent body scroll when mobile sidebar is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
+  const toggleMobile = useCallback(() => {
+    setMobileOpen((prev) => !prev);
+  }, []);
 
   // Group navigation items
   const groupedItems = Object.entries(NAV_GROUPS).map(([key, label]) => ({
@@ -48,10 +71,34 @@ export function Sidebar({ user }: SidebarProps) {
 
   return (
     <TooltipProvider delayDuration={0}>
+      {/* Mobile Hamburger Button — fixed in top-left */}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="fixed left-3 top-3 z-50 h-9 w-9 md:hidden"
+        onClick={toggleMobile}
+        aria-label="Toggle menu"
+      >
+        {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </Button>
+
+      {/* Mobile Overlay */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
       <aside
         className={cn(
           'fixed left-0 top-0 z-40 flex h-screen flex-col border-r bg-sidebar-background transition-all duration-300',
-          collapsed ? 'w-[68px]' : 'w-[260px]'
+          // Desktop: normal collapsible behavior
+          'max-md:z-50',
+          collapsed ? 'w-[68px]' : 'w-[260px]',
+          // Mobile: slide in/out
+          mobileOpen ? 'max-md:translate-x-0' : 'max-md:-translate-x-full'
         )}
       >
         {/* Logo */}
@@ -170,10 +217,11 @@ export function Sidebar({ user }: SidebarProps) {
             </Tooltip>
           )}
 
+          {/* Collapse toggle — desktop only */}
           <Button
             variant="ghost"
             size="sm"
-            className="mt-2 w-full justify-center"
+            className="mt-2 w-full justify-center max-md:hidden"
             onClick={() => setCollapsed(!collapsed)}
           >
             {collapsed ? (

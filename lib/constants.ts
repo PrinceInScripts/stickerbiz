@@ -14,6 +14,7 @@ import {
   Truck,
   ClipboardList,
   BarChart3,
+  Upload,
   Settings,
   Bell,
 } from 'lucide-react';
@@ -118,6 +119,7 @@ export const NAV_ITEMS: NavItem[] = [
 
   // Reports
   { title: 'Analytics', href: '/dashboard/analytics', icon: BarChart3, group: 'reports' },
+  { title: 'Import Center', href: '/dashboard/import', icon: Upload, group: 'reports' },
 
   // System
   { title: 'Settings', href: '/dashboard/settings', icon: Settings, group: 'system' },
@@ -144,6 +146,7 @@ export type Resource =
   | 'suppliers'
   | 'purchase_orders'
   | 'analytics'
+  | 'import_center'
   | 'settings'
   | 'notifications'
   | 'users';
@@ -163,6 +166,7 @@ export const ROLE_PERMISSIONS: PermissionMatrix = {
     suppliers: ['view', 'create', 'edit', 'delete'],
     purchase_orders: ['view', 'create', 'edit', 'delete'],
     analytics: ['view'],
+    import_center: ['view', 'create'],
     settings: ['view', 'edit'],
     notifications: ['view', 'edit'],
     users: ['view', 'create', 'edit', 'delete'],
@@ -177,6 +181,7 @@ export const ROLE_PERMISSIONS: PermissionMatrix = {
     suppliers: ['view'],
     purchase_orders: ['view', 'create'],
     analytics: ['view'],
+    import_center: [],
     settings: ['view'],
     notifications: ['view', 'edit'],
     users: [],
@@ -191,6 +196,7 @@ export const ROLE_PERMISSIONS: PermissionMatrix = {
     suppliers: ['view'],
     purchase_orders: ['view'],
     analytics: ['view'],
+    import_center: [],
     settings: [],
     notifications: ['view'],
     users: [],
@@ -261,4 +267,42 @@ export const PO_STATUS_CONFIG = {
     label: 'Cancelled',
     color: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
   },
+} as const;
+
+// ─── Import Status Configuration ────────────────────────────────
+
+export const IMPORT_STATUS_CONFIG = {
+  PROCESSING: {
+    label: 'Processing',
+    color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+  },
+  COMPLETED: {
+    label: 'Completed',
+    color: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+  },
+  PARTIAL: {
+    label: 'Partial',
+    color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
+  },
+  FAILED: {
+    label: 'Failed',
+    color: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
+  },
+} as const;
+
+// ─── Flipkart Import Column Mapping ─────────────────────────────
+
+export const FLIPKART_COLUMN_MAP: Record<string, string> = {
+  'Seller SKU Id': 'sku',
+  'Flipkart Serial Number': 'fsn',
+  'Product Title': 'title',
+  'Sub-category': 'category',
+  'MRP': 'mrp',
+  'Your Selling Price': 'sellingPrice',
+  'Your Stock Count': 'currentStock',
+  'System Stock count': 'systemStock',
+  'Listing ID': 'listingId',
+  'Listing Status': 'listingStatus',
+  'HSN': 'hsnCode',
+  'Fulfillment By': 'fulfillmentBy',
 } as const;

@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -218,7 +218,7 @@ export type PurchaseOrderItemGroupByOutputType = {
   _max: PurchaseOrderItemMaxAggregateOutputType | null
 }
 
-export type GetPurchaseOrderItemGroupByPayload<T extends PurchaseOrderItemGroupByArgs> = Prisma.PrismaPromise<
+type GetPurchaseOrderItemGroupByPayload<T extends PurchaseOrderItemGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PurchaseOrderItemGroupByOutputType, T['by']> &
       {
@@ -1386,11 +1386,6 @@ export type PurchaseOrderItemFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Skip the first `n` PurchaseOrderItems.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of PurchaseOrderItems.
-   */
   distinct?: Prisma.PurchaseOrderItemScalarFieldEnum | Prisma.PurchaseOrderItemScalarFieldEnum[]
 }
 
